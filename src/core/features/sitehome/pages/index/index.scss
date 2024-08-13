@@ -2,9 +2,10 @@
 
 ion-item ion-icon {
     display: inline-block;
-    border-radius: var(--mdl-shape-borderRadius-xs);
+    border-radius: var(--radius-xs);
     padding: 4px;
-    color: var(--text-color);
+    background-color: var(--gray-100);
+    color: var(--gray-900);
     line-height: var(--size);
     --margin-end: 8px;
     @include margin-horizontal(null, var(--margin-end));
@@ -12,4 +13,28 @@ ion-item ion-icon {
 
 core-spacer {
     --spacer-horizontal: 10px;
+}
+
+ion-col {
+    background-color: #135d54 100;
+    background: rgba(76, 175, 80, 0.0); /* Green background with 30% opacity */
+    border: solid 1px #fff;
+    color: #000;
+    text-align: center;
+    font-size: 65%;
+}
+
+ion-col > img{
+    background-color: #135d54 100;
+    // background: rgba(17,74,151,0.1); /* Green background with 30% opacity */
+    border: 1px solid #114a97;
+    border-radius: 20%;
+    height:85%;
+    width: 85%;
+    padding: 10%;
+}
+
+.avatar-full {
+    height:60%;
+    width: 60%;
 }

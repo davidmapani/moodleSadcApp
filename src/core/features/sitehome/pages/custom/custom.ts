@@ -37,11 +37,11 @@ import { CoreModals } from '@services/modals';
  * Page that displays site home index.
  */
 @Component({
-    selector: 'page-core-sitehome-index',
-    templateUrl: 'index.html',
-    styleUrls: ['index.scss'],
+    selector: 'page-core-sitehome-custom',
+    templateUrl: 'custom.html',
+    styleUrls: ['custom.scss'],
 })
-export class CoreSiteHomeIndexPage implements OnInit, OnDestroy {
+export class CoreSiteHomeCustomPage implements OnInit, OnDestroy {
 
     dataLoaded = false;
     section?: CoreCourseWSSection & {
@@ -212,13 +212,6 @@ export class CoreSiteHomeIndexPage implements OnInit, OnDestroy {
      */
     openMyCourses(): void {
         CoreNavigator.navigateToSitePath('courses/list', { params : { mode: 'my' } });
-    }
-
-    async openPage(url: string,mode: string, e?: Event): Promise<boolean> {
-        e?.preventDefault();
-        e?.stopPropagation();
-
-        return CoreNavigator.navigateToSitePath(url, { params : { mode: mode } });
     }
 
     /**

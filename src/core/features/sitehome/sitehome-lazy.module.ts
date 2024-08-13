@@ -19,11 +19,16 @@ import { CoreSharedModule } from '@/core/shared.module';
 import { CoreBlockComponentsModule } from '@/core/features/block/components/components.module';
 import { CoreCourseComponentsModule } from '@features/course/components/components.module';
 import { CoreSiteHomeIndexPage } from '@features/sitehome/pages/index';
+import {CoreSiteHomeCustomPage} from "@features/sitehome/pages/custom/custom";
 
 const routes: Routes = [
     {
         path: '',
         component: CoreSiteHomeIndexPage,
+    },
+    {
+        path: 'custom',
+        component: CoreSiteHomeCustomPage,
     },
 ];
 
@@ -36,6 +41,7 @@ const routes: Routes = [
     ],
     declarations: [
         CoreSiteHomeIndexPage,
+        CoreSiteHomeCustomPage,
     ],
 })
 export class CoreSiteHomeLazyModule {}
