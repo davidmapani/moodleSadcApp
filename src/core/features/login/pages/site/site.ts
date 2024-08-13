@@ -98,9 +98,11 @@ export class CoreLoginSitePage implements OnInit {
         const sites = await CoreLoginHelper.getAvailableSites();
 
         if (sites.length) {
-            url = await this.initSiteSelector();
+            //url = await this.initSiteSelector();
+            url = 'https://youthinvest.sadc.int';
         } else {
-            url = await this.consumeInstallReferrerUrl() ?? '';
+            //url = await this.consumeInstallReferrerUrl() ?? '';
+            url = 'https://youthinvest.sadc.int';
 
             const showOnboarding = CoreConstants.CONFIG.enableonboarding && !CorePlatform.isIOS();
 
