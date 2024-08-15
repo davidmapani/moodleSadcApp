@@ -1,12 +1,36 @@
 <style>
-    .textarea-input {
-        height: auto;
-        padding: 0.5rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border: 1px solid #ccc;
-        border-radius: 0.25rem;
-        resize: none;
+    /*.textarea-input {*/
+    /*    font-size: 1rem;*/
+    /*    line-height: 1.5;*/
+    /*    border: 1px solid #fc771f;*/
+    /*    border-radius: 73.25rem;*/
+    /*    resize: inherit;*/
+    /*}*/
+
+    /*.textarea-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {*/
+    /*    height: 0px !important;*/
+    /*}*/
+    /*.textarea-label-placement-start.sc-ion-textarea-md-h .textarea-wrapper.sc-ion-textarea-md {*/
+    /*    height: 0px !important;*/
+    /*}*/
+    /*#ion-textarea-0{*/
+    /*    height: 0px !important;*/
+    /*}*/
+   /*textarea {*/
+   /*     height: 0px !important;*/
+   /* }*/
+
+    ion-header,
+    ion-content,
+    ion-footer {
+        --background: #ffffff;
+    }
+
+    .loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; /* Full height to center the spinner */
     }
 
     .message-wrapper {
@@ -61,7 +85,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content #chatContainer >
     <ion-list class="addon-messages-discussion-container">
         <ng-container *ngFor="let message of messages">
             <div class="message-wrapper" [class.assistant]="message.role === 'assistant'">
@@ -70,15 +94,32 @@
                 <div class="message-content">{{ message.role === 'assistant' ? message.content : message.text }}</div>
             </div>
         </ng-container>
+        <!-- Show spinner while loading -->
+        <div *ngIf="loading" class="loading-spinner">
+            <ion-spinner name="crescent"></ion-spinner>
+        </div>
+
+        <!-- Show error message if exists -->
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
     </ion-list>
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <ion-textarea style="border-radius: 0.9rem" [(ngModel)]="newMessage" id="messageInput" placeholder="Type a message..." class="textarea-input"></ion-textarea>
+        <textarea
+            [(ngModel)]="newMessage"
+            id="messageInput"
+            placeholder="Type a message..."
+        >
+        </textarea>
 
         <ion-buttons slot="end">
-            <ion-button (click)="sendMessage()">Send</ion-button>
+            <ion-button (click)="sendMessage()">
+                <ion-icon name="send-outline"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>
+
 
