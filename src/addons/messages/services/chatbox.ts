@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import {  HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Http} from "@singletons";
 
@@ -19,27 +19,24 @@ import {Http} from "@singletons";
     providedIn: 'root',
 })
 export class ChatboxService {
+    constructor(private http: HttpClient) {}
 
     private url = 'https://api.openai.com/v1/chat/completions';
-    private apiKey = 'sk-proj-YP7etHBFXOcR5ndJslI9T3BlbkFJseuLONQYFjBE9wrvRlS0';
+    private apiKey = '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';
 
-
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     postMessage(message: string) {
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${this.apiKey}`,
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${this.apiKey}`);
+
+        const body = JSON.stringify({
+            model: "gpt-4",
+            messages: [{ role: "user", content: message }],
+            temperature: 0.7,
         });
 
-        const body = {
-            'model': 'gpt-4',
-            'messages': [{ 'role': 'user', 'content': message }],
-            'temperature': 0.7,
-        };
-        console.log('Headers:', headers);
-        console.log('Request Body:', body);
-        return Http.post(this.url, body, { headers });
+        return this.http.post(this.url, body, { headers });
     }
 
 }

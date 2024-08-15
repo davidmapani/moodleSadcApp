@@ -63,15 +63,23 @@ export class CoreInterceptor implements HttpInterceptor {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+
+        // modified request to avoid changing request
+        if(req.url.includes('api.openai.com/v1/chat')){
+            console.log(req);
+            return next.handle(req);
+        }
+
         // Add the header and serialize the body if needed.
         const newReq = req.clone({
+
             headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded'),
             body: typeof req.body == 'object' && String(req.body) != '[object File]' ?
                 CoreInterceptor.serialize(req.body) : req.body,
         });
-
         // Pass on the cloned request instead of the original request.
         return next.handle(newReq);
+
     }
 
 }
