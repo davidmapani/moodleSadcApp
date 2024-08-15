@@ -1,0 +1,84 @@
+<style>
+    .textarea-input {
+        height: auto;
+        padding: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        resize: none;
+    }
+
+    .message-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 5px;
+    }
+
+    .assistant {
+        align-items: flex-start;
+    }
+
+    .message-title {
+        font-weight: bold;
+        align-self: flex-end;
+    }
+    .message-title2{
+        font-weight: bold;
+
+    }
+
+    .message-content {
+        background-color: #e1e1e1;
+        color: #333;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 5px;
+        align-self: flex-start;
+        max-width: 70%; /* Limit the width of the message content */
+        word-wrap: break-word; /* Wrap long content onto the next line */
+    }
+
+    .message-wrapper.assistant .message-content {
+        background-color: #007bff;
+        color: #fff;
+        align-self: flex-end;
+    }
+
+</style>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'core.back' | translate "></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <h1>{{ 'Chat Bot'}}</h1>
+        </ion-title>
+        <ion-buttons slot="end">
+            <!-- Add an empty context menu so split view pages can add items, otherwise the menu disappears in some cases. -->
+            <core-context-menu></core-context-menu>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list class="addon-messages-discussion-container">
+        <ng-container *ngFor="let message of messages">
+            <div class="message-wrapper" [class.assistant]="message.role === 'assistant'">
+                <div class="message-title">{{ message.role === 'assistant' ? 'Assistant' : '' }}</div>
+                <div class="message-title2">{{ message.role != 'assistant' ? 'User' : '' }}</div>
+                <div class="message-content">{{ message.role === 'assistant' ? message.content : message.text }}</div>
+            </div>
+        </ng-container>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-textarea style="border-radius: 0.9rem" [(ngModel)]="newMessage" id="messageInput" placeholder="Type a message..." class="textarea-input"></ion-textarea>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="sendMessage()">Send</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
+

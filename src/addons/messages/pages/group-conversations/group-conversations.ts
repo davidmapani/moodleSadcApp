@@ -297,6 +297,11 @@ export class AddonMessagesGroupConversationsPage implements OnInit, OnDestroy {
         );
     }
 
+
+    gotoChatbox(): void {
+        CoreNavigator.navigateToSitePath('chatbox');
+    }
+
     /**
      * @inheritdoc
      */

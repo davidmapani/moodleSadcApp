@@ -1,5 +1,17 @@
 {
     "sitehome": "Site home",
-    "sitenews": "Site announcements"
+    "sitenews": "Site announcements",
+    "custom.securityexchange": "Security Exchange Trading",
+    "custom.recentlyaccessed": "Recently Accessed Content",
+    "custom.myprofile": "My Profile",
+    "custom.chatbot": "Chatbot",
+    "custom.informativeresources": "Informative Resources",
+    "custom.calendar": "Calendar",
+    "custom.blog": "Blog",
+    "custom.settings": "Settings",
+    "custom.language": "Language",
+    "custom.notifications": "Notifications",
+    "custom.messages": "Messages",
+    "custom.preferences": "Preferences"
 
 }

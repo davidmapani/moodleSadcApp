@@ -29,6 +29,7 @@ import { buildTabMainRoutes } from '@features/mainmenu/mainmenu-tab-routing.modu
 import { CoreSearchComponentsModule } from '@features/search/components/components.module';
 import { CoreScreen } from '@services/screen';
 import { messagesIndexGuard } from './guards';
+import {ChatboxPage} from "@addons/messages/pages/chatbox/chatbox";
 
 /**
  * Build module routes.
@@ -57,6 +58,10 @@ function buildRoutes(injector: Injector): Routes {
             path: 'index',
             data: { mainMenuTabRoot: AddonMessagesMainMenuHandlerService.PAGE_NAME },
             component: AddonMessagesDiscussions35Page,
+        },
+        {
+            path: 'chatbox',
+            component: ChatboxPage,
         },
         {
             path: 'contacts-35', // 3.5.
@@ -134,6 +139,7 @@ function buildRoutes(injector: Injector): Routes {
     declarations: [
         AddonMessagesContacts35Page,
         AddonMessagesContactsPage,
+        ChatboxPage,
         AddonMessagesDiscussionPage,
         AddonMessagesDiscussions35Page,
         AddonMessagesGroupConversationsPage,
