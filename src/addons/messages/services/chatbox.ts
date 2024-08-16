@@ -22,7 +22,7 @@ export class ChatboxService {
     constructor(private http: HttpClient) {}
 
     private url = 'https://api.openai.com/v1/chat/completions';
-    private apiKey = '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';
+    private apiKey = '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';
 
     postMessage(message: string) {
         const headers = new HttpHeaders()
