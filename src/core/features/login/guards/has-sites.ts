@@ -30,10 +30,14 @@ export const hasSitesGuard: CanActivateFn = async () => {
         return true;
     }
 
-    const [path, params] = await CoreLoginHelper.getAddSiteRouteInfo();
-    const route = Router.parseUrl(path);
+    //const [path, params] = await CoreLoginHelper.getAddSiteRouteInfo();
+    //const route = Router.parseUrl(path);
 
-    route.queryParams = params;
+    const route = Router.parseUrl('/login/credentials');
+
+    //route.queryParams = params;
+    //console.log("checking params below");
+    //console.log(route.queryParams);
 
     return route;
 };

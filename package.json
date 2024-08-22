@@ -186,8 +186,8 @@
     },
     "cordova": {
         "platforms": [
-            "ios",
-            "android"
+            "android",
+            "ios"
         ],
         "plugins": {
             "@moodlehq/cordova-plugin-advanced-http": {
@@ -230,12 +230,7 @@
             "cordova-plugin-wkuserscript": {},
             "cordova-plugin-wkwebview-cookies": {},
             "cordova-sqlite-storage": {},
-            "nl.kingsquare.cordova.background-audio": {},
-            "@moodlehq/phonegap-plugin-push": {
-                "ANDROIDX_CORE_VERSION": "1.6.+",
-                "FCM_VERSION": "23.+",
-                "IOS_FIREBASE_MESSAGING_VERSION": "~> 10.23.0"
-            }
+            "nl.kingsquare.cordova.background-audio": {}
         }
     }
 }

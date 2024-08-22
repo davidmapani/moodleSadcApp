@@ -89,7 +89,48 @@ export class CoreLoginCredentialsPage implements OnInit, OnDestroy {
      */
     async ngOnInit(): Promise<void> {
         try {
-            this.siteCheck = CoreNavigator.getRouteParam<CoreSiteCheckResponse>('siteCheck');
+            //this.siteCheck = CoreNavigator.getRouteParam<CoreSiteCheckResponse>('siteCheck');
+            this.siteCheck = {
+                "siteUrl": "https://youthinvest.sadc.int",
+                "code": 1,
+                "service": "moodle_mobile_app",
+                "config": {
+                    "wwwroot": "https://youthinvest.sadc.int",
+                    "httpswwwroot": "https://youthinvest.sadc.int",
+                    "sitename": "SADC Youth Invest",
+                    "guestlogin": 0,
+                    "rememberusername": 2,
+                    "authloginviaemail": 0,
+                    "registerauth": "email",
+                    "forgottenpasswordurl": "",
+                    "authinstructions": "",
+                    "authnoneenabled": 0,
+                    "enablewebservices": 1,
+                    "enablemobilewebservice": 1,
+                    "maintenanceenabled": 0,
+                    "maintenancemessage": "",
+                    "logourl": "https://youthinvest.sadc.int/pluginfile.php/1/core_admin/logo/0x200/1723552983/SADC%20LOGO%20Filled.png",
+                    "typeoflogin": 1,
+                    "launchurl": "https://youthinvest.sadc.int/admin/tool/mobile/launch.php",
+                    "mobilecssurl": "",
+                    "tool_mobile_disabledfeatures": "",
+                    "country": "BW",
+                    "agedigitalconsentverification": false,
+                    "supportpage": "",
+                    "supportavailability": 1,
+                    "autolang": 1,
+                    "lang": "en",
+                    "langmenu": 1,
+                    "langlist": "",
+                    "locale": "",
+                    "tool_mobile_minimumversion": "",
+                    "tool_mobile_iosappid": "633359593",
+                    "tool_mobile_androidappid": "com.sadc.youthinvest",
+                    "tool_mobile_setuplink": "https://download.moodle.org/mobile",
+                    "tool_mobile_qrcodetype": 2,
+                    "warnings": []
+                }
+            };
 
             const siteUrl = this.siteCheck?.siteUrl || CoreNavigator.getRequiredRouteParam<string>('siteUrl');
             if (this.siteCheck?.config) {

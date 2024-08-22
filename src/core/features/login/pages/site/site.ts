@@ -329,6 +329,8 @@ export class CoreLoginSitePage implements OnInit {
 
             try {
                 checkResult = await CoreSites.checkSite(url);
+                //console.log("check result below.")
+                //console.log(checkResult);
             } catch (error) {
                 // Attempt guessing the domain if the initial check failed
                 const domain = CoreUrl.guessMoodleDomain(url);

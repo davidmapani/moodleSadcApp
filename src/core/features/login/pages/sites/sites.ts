@@ -20,6 +20,7 @@ import { CoreAccountsList, CoreLoginHelper } from '@features/login/services/logi
 import { CoreNavigator } from '@services/navigator';
 import { CoreFilter } from '@features/filter/services/filter';
 import { CoreAnimations } from '@components/animations';
+import {Router} from "@singletons";
 
 /**
  * Page that displays the list of sites stored in the device.
@@ -91,7 +92,7 @@ export class CoreLoginSitesPage implements OnInit {
 
             // If there are no sites left, go to add site.
             if (this.accountsList.count == 0) {
-                CoreLoginHelper.goToAddSite(true, true);
+                await CoreNavigator.navigate('/login/credentials'); //CoreLoginHelper.goToAddSite(true, true);
             }
         } catch (error) {
             CoreDomUtils.showErrorModalDefault(error, 'core.login.errordeletesite', true);
