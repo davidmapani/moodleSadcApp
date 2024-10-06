@@ -108,6 +108,15 @@
                     <p class="item-heading">{{ 'core.user.support' | translate }}</p>
                 </ion-label>
             </ion-item>
+            <!-- Here change method to trigger one that has a modal to confirm user deleting account -->
+            <ion-item *ngIf="canDeleteUser" button (click)="deleteUserAccount($event)"
+                      [attr.aria-label]="'core.user.delete' | translate" [detail]="true"
+                      class="core-user-menu-delete">
+                <ion-icon name="fas-trash" slot="start" aria-hidden="true"></ion-icon>
+                <ion-label>
+                    <p class="item-heading">{{ 'core.user.delete' | translate }}</p>
+                </ion-label>
+            </ion-item>
         </ion-list>
     </core-loading>
 </ion-content>

@@ -35,6 +35,7 @@ import { CoreDomUtils } from '@services/utils/dom';
 import { CoreUtils } from '@services/utils/utils';
 import { ModalController, Translate } from '@singletons';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Component to display a user menu.
@@ -49,6 +50,7 @@ import { Subscription } from 'rxjs';
     ],
 })
 export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
+    constructor(private http: HttpClient) {}
 
     siteId?: string;
     siteInfo?: CoreSiteInfo;
@@ -64,6 +66,7 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
     displaySwitchAccount = true;
     displayContactSupport = false;
     removeAccountOnLogout = false;
+    canDeleteUser = false;
 
     protected subscription!: Subscription;
 
@@ -80,6 +83,7 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
         this.displayContactSupport = new CoreUserAuthenticatedSupportConfig(currentSite).canContactSupport();
         this.removeAccountOnLogout = !!CoreConstants.CONFIG.removeaccountonlogout;
         this.displaySiteUrl = currentSite.shouldDisplayInformativeLinks();
+        this.canDeleteUser = await this.checkUserPermissions();
 
         this.loadSiteLogo(currentSite);
 
@@ -201,6 +205,91 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
         await this.close(event);
         await CoreUserSupport.contact();
     }
+    /**
+     *
+     * @returns Promise resolving to true if the user can delete users, false otherwise.
+     */
+    async checkUserPermissions(): Promise<boolean> {
+        try {
+            const currentSite = CoreSites.getRequiredCurrentSite();
+            const canDelete = true; // Replace with actual capability check
+            return canDelete;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * Delete the user account after confirmation.
+     *
+     * @param event Click event.
+     */
+    async deleteUserAccount(event: Event): Promise<void> {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!this.user) {
+            CoreDomUtils.showErrorModal('core.user.error.nouser', true);
+            return;
+        }
+
+        // Show confirmation modal
+        const confirmed = await CoreDomUtils.showConfirm(
+            Translate.instant('core.user.confirm_delete'),
+            Translate.instant('core.user.delete')
+        );
+
+        // if (!confirmed) {
+        //     return;
+        // }
+
+        // Proceed with deletion
+        try {
+            // Show loading indicator
+            const loading = await CoreDomUtils.showModalLoading('Account deletion in progress...');
+
+            // Prepare delete request
+            const currentSite = CoreSites.getRequiredCurrentSite();
+            const token = currentSite.getToken();
+            const siteUrl = currentSite.getURL();
+
+            // Define the API endpoint for deleting a user
+            // You need to ensure that this endpoint exists on your Moodle backend
+            const deleteUserEndpoint = "https://7056-2c0f-2a80-1225-dc10-5d24-607a-b4ff-e6af.ngrok-free.app/test";
+
+            // Define the parameters for the API call
+            const params = {
+                wstoken: token,
+                wsfunction: 'local_yourplugin_delete_user',
+                moodlewsrestformat: 'json',
+                userid: this.user.id,
+            };
+
+            // Send the POST request
+            const response: any = await this.http.post(deleteUserEndpoint, params).toPromise();
+
+            // Hide loading indicator
+            await loading.dismiss();
+
+            // Handle the response
+            if (response && response.success) {
+                CoreDomUtils.showAlert('core.success', 'core.user.deleted', 'core.success');
+
+                // Optionally, navigate away or refresh the menu
+                await CoreNavigator.navigate('');
+            } else {
+                throw new Error(response.message || 'core.user.error.deletefailed');
+            }
+
+        } catch (error: any) {
+            // Hide loading indicator if it's still showing
+            await ModalController.dismiss()
+
+            // Show error message
+            await CoreDomUtils.showErrorModalDefault(error, 'core.user.error.deletefailed', true);
+        }
+    }
+
 
     /**
      * Logout the user.
