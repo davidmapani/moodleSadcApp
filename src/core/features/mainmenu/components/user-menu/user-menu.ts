@@ -272,11 +272,13 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
             await loading.dismiss();
 
             // Handle the response
-            if (response && response.success) {
-                CoreDomUtils.showAlert('core.success', 'core.user.deleted', 'core.success');
+            console.log('response')
+            console.log(response)
+            if (response && response.status == 'success') {
+                CoreDomUtils.showAlert('Success', 'Your user account has been deleted successfully!', 'close');
 
                 // Optionally, navigate away or refresh the menu
-                await CoreNavigator.navigate('');
+                await CoreNavigator.navigate('/login/credentials');
             } else {
                 throw new Error(response.message || 'core.user.error.deletefailed');
             }
