@@ -255,7 +255,7 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
 
             // Define the API endpoint for deleting a user
             // You need to ensure that this endpoint exists on your Moodle backend
-            const deleteUserEndpoint = "https://7056-2c0f-2a80-1225-dc10-5d24-607a-b4ff-e6af.ngrok-free.app/test";
+            const deleteUserEndpoint = "https://youthinvest.sadc.int/account/delete_user.php";
 
             // Define the parameters for the API call
             const params = {
